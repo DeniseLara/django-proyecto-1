@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1 style="text-align: center;">Iniciar Sesión en el CRM</h1>
+
+<div class="form-card login">
+    <form method="POST" class="form">
+        {% csrf_token %}
+        {{ form.as_p }}
+        
+        <div style="margin-top: 1.5rem;">
+            <button class="btn" type="submit">Entrar</button>
+        </div>
+        
+        {% if form.errors %}
+            <p style="color: #e74c3c; margin-top: 1rem;">Usuario o contraseña incorrectos. Inténtalo de nuevo.</p>
+        {% endif %}
+    </form>
+</div>
+{% endblock %}

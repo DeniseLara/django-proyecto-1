@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Eliminar Interacción</h1>
+
+<div class="form-card">
+    <p>¿Estás seguro de que deseas borrar el registro de esta interacción con <strong>"{{ object.client.name }}"</strong>?</p>
+    
+    <form method="POST" style="margin-top: 1.5rem;">
+        {% csrf_token %}
+        <button class="btn btn-danger" type="submit">Sí, borrar registro</button>
+        <a class="btn btn-secondary" href="{% url 'interaction_list' %}">Cancelar</a>
+    </form>
+</div>
+{% endblock %}

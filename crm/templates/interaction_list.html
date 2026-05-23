@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+    <h1>Historial de Interacciones</h1>
+    <a class="btn" href="{% url 'interaction_create' %}">+ Registrar Interacción</a>
+</div>
+
+<table>
+    <thead>
+        <tr>
+            <th>Fecha</th>
+            <th>Cliente</th>
+            <th>Notas de la reunión/llamada</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for interaction in interactions %}
+        <tr>
+            <!-- Usamos un filtro de Django para formatear la fecha bonito -->
+            <td style="white-space: nowrap;">{{ interaction.date|date:"d M Y, H:i" }}</td>
+            <td><strong>{{ interaction.client.name }}</strong></td>
+            <td>{{ interaction.notes }}</td>
+            <td style="white-space: nowrap;">
+                <a class="btn btn-sm" href="{% url 'interaction_update' interaction.id %}">Editar</a>
+                <a class="btn btn-sm btn-danger" href="{% url 'interaction_delete' interaction.id %}">Eliminar</a>
+            </td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="4" style="text-align: center; color: #7f8c8d;">No hay interacciones registradas aún.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

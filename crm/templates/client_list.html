@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+    <h1>Directorio de Clientes</h1>
+    <a class="btn" href="{% url 'client_create' %}">+ Nuevo Cliente</a>
+</div>
+
+<form class="search-bar" method="GET" action="">
+    <input type="text" name="q" placeholder="Buscar por nombre, email o empresa..." value="{{ request.GET.q }}">
+    <button class="btn" type="submit">Buscar</button>
+</form>
+
+<table>
+    <thead>
+        <tr>
+            <th>Nombre</th>
+            <th>Email</th>
+            <th>Empresa</th>
+            <th>Comercial Asignado</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for client in clients %}
+        <tr>
+            <td><strong>{{ client.name }}</strong></td>
+            <td>{{ client.email }}</td>
+            <td>{{ client.company.name }}</td>
+            <td>{{ client.commercial.username }}</td>
+            <td>
+                <a class="btn btn-sm" href="{% url 'client_update' client.id %}">Editar</a>
+                <a class="btn btn-sm btn-danger" href="{% url 'client_delete' client.id %}">Eliminar</a>
+            </td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="5" style="text-align: center; color: #7f8c8d;">No se encontraron clientes que coincidan con la búsqueda.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

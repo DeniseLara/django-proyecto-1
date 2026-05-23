@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>{% if object %}Editar{% else %}Registrar Nuevo{% endif %} Cliente</h1>
+
+<div class="form-card">
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <div style="margin-top: 1.5rem;">
+            <button class="btn" type="submit">Guardar Cliente</button>
+            <a class="btn btn-secondary" href="{% url 'client_list' %}">Cancelar</a>
+        </div>
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Confirmar Eliminación</h1>
+
+<div class="form-card">
+    <p>¿Estás completamente seguro de que deseas eliminar al cliente <strong>"{{ object.name }}"</strong>?</p>
+    <p style="color: #e74c3c; font-size: 0.9rem;">Esta acción también eliminará todas las interacciones asociadas a este cliente.</p>
+    
+    <form method="POST" style="margin-top: 1.5rem;">
+        {% csrf_token %}
+        <button class="btn btn-danger" type="submit">Sí, eliminar definitivamente</button>
+        <a class="btn btn-secondary" href="{% url 'client_list' %}">Cancelar</a>
+    </form>
+</div>
+{% endblock %}
